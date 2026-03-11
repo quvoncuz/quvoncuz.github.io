@@ -292,10 +292,13 @@ footer span { color: var(--blue); }
 @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
+/* TABLET (600px - 900px) */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
   .nav-links { display: none; }
+  .nav-cta { font-size: 0.72rem; padding: 0.45rem 0.9rem; }
   .hero { padding: 7rem 1.5rem 4rem; }
+  .hero-title { font-size: clamp(2.8rem, 8vw, 4.5rem); }
   .section-wrap { padding: 4rem 1.5rem; }
   .projects-grid { grid-template-columns: 1fr; }
   .exp-entry { grid-template-columns: 1fr; gap: 0.75rem; }
@@ -304,9 +307,58 @@ footer span { color: var(--blue); }
   .achieve-grid { grid-template-columns: 1fr 1fr; }
   .contact-inner { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
   footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; text-align: center; }
+  .skills-container { grid-template-columns: 1fr 1fr; }
+}
+
+/* MOBILE (max 600px) */
+@media (max-width: 600px) {
+  nav { padding: 0.9rem 1rem; }
+  .nav-cta { display: none; }
+  .hero { padding: 6rem 1rem 3rem; }
+  .hero-title { font-size: clamp(2.2rem, 10vw, 3rem); line-height: 1; }
+  .hero-badge { font-size: 0.68rem; padding: 0.35rem 0.8rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions { gap: 0.75rem; }
+  .btn-glow, .btn-outline { padding: 0.75rem 1.4rem; font-size: 0.8rem; }
+  .hero-stats { gap: 1.5rem; }
+  .stat-val { font-size: 1.6rem; }
+  .section-wrap { padding: 3rem 1rem; }
+  .section-heading { font-size: 1.8rem; margin-bottom: 2rem; }
+  .skills-container { grid-template-columns: 1fr; }
+  .project-card { padding: 1.5rem; }
+  .project-title { font-size: 1.3rem; }
+  .exp-entry { padding: 1.5rem 0; }
+  .exp-role { font-size: 1.1rem; }
+  .edu-card { padding: 1.5rem; }
+  .edu-degree { font-size: 1.1rem; }
+  .edu-gpa { font-size: 2rem; }
+  .achieve-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .achieve-card { padding: 1.2rem; }
+  .achieve-emoji { font-size: 1.4rem; }
+  .contact-inner { padding: 3rem 1rem; gap: 2rem; }
+  .contact-headline { font-size: 1.8rem; }
+  .contact-val { font-size: 0.82rem; }
+  footer { padding: 1.2rem 1rem; }
+}
+/* HAMBURGER */
+@media (max-width: 900px) {
+  #menuBtn { display:flex !important; }
+  #navLinks {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 57px; left: 0; right: 0;
+    background: rgba(8,12,20,0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 1.5rem;
+    gap: 1.2rem;
+    z-index: 998;
+  }
+  #navLinks.open { display: flex; }
+  #navLinks a { font-size: 0.95rem; color: var(--text); }
 }
 </style>
-</head>
 <body>
 
 <div class="bg-mesh"></div>
@@ -314,13 +366,16 @@ footer span { color: var(--blue); }
 
 <nav>
   <a href="#" class="nav-logo">QH<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#education">Education</a></li>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+    <li><a href="#education" onclick="closeMenu()">Education</a></li>
   </ul>
-  <a href="mailto:quvoncbe.uz@gmail.com" class="nav-cta">Hire me</a>
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <a href="mailto:quvoncbe.uz@gmail.com" class="nav-cta">Hire me</a>
+    <button id="menuBtn" onclick="toggleMenu()" style="display:none;background:none;border:1px solid var(--border);color:var(--text);width:36px;height:36px;border-radius:6px;cursor:pointer;font-size:1.1rem;line-height:1;align-items:center;justify-content:center;">☰</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -330,10 +385,9 @@ footer span { color: var(--blue); }
   <h1 class="hero-title">Haydarov<br><span class="grad">Quvonchbek</span></h1>
   <p class="hero-sub"><strong>Java Developer</strong> based in Tashkent, Uzbekistan. Building robust RESTful APIs and backend systems with Spring Boot. Passionate about clean architecture and testable code.</p>
   <div class="hero-actions">
-    <a href="mailto:quvoncbe.uz@gmail.com" class="btn-glow">Get in touch ↗</a>
+    <a href="/cdn-cgi/l/email-protection#e29397948d8c818087cc9798a2858f838b8ecc818d8f" class="btn-glow">Get in touch ↗</a>
     <a href="https://github.com/quvoncuz" target="_blank" class="btn-outline">GitHub</a>
     <a href="https://linkedin.com/in/quvoncuz" target="_blank" class="btn-outline">LinkedIn</a>
-    <a href="https://leetcode.com/u/quvoncuz" target="_blank" class="btn-outline">LeetCode</a>
     <a href="cv/Quvonchbek.pdf" target="_blank" class="btn-outline">CV ↓</a>
   </div>
   <div class="hero-stats">
@@ -449,8 +503,6 @@ footer span { color: var(--blue); }
   <div class="achieve-grid reveal">
     <div class="achieve-card"><div class="achieve-emoji">🎯</div><div class="achieve-t">IELTS 6.5</div><div class="achieve-s">IDP, 2025 · B2 English</div></div>
     <div class="achieve-card"><div class="achieve-emoji">💻</div><div class="achieve-t">LeetCode 100+</div><div class="achieve-s">Easy & Medium solved</div></div>
-    <div class="achieve-card"><div class="achieve-emoji">🌐</div><div class="achieve-t">quvonc.uz</div><div class="achieve-s">Personal website live</div></div>
-    <div class="achieve-card"><div class="achieve-emoji">🗣️</div><div class="achieve-t">Multilingual</div><div class="achieve-s">Uzbek (Native) · English B2</div></div>
   </div>
 </div>
 
@@ -464,53 +516,22 @@ footer span { color: var(--blue); }
       <a href="mailto:quvoncbe.uz@gmail.com" class="btn-glow reveal" style="display:inline-flex; margin-top:0.5rem;">Send email ↗</a>
     </div>
     <div class="contact-links reveal">
-      <a href="mailto:quvoncbe.uz@gmail.com" class="contact-row">
-        <div class="contact-left"><span class="contact-cat">Email</span><span class="contact-val"><span class="__cf_email__" data-cfemail="1c6d696a73727f7e793269665c7b717d7570327f7371">quvoncbe.uz@gmail.com</span></span></div>
+      <a href="tel:+998992490605" class="contact-row">
+        <div class="contact-left"><span class="contact-cat">Phone</span><span class="contact-val">+998 99 249 06 05</span></div>
         <span class="contact-arrow">↗</span>
       </a>
-      <a href="tel:+998992490605" class="contact-row">
-  <div class="contact-left">
-    <span class="contact-cat">Phone</span>
-    <span class="contact-val" style="display:flex;align-items:center;gap:0.5rem;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      +998 99 249 06 05
-    </span>
-  </div>
-  <span class="contact-arrow">↗</span>
-</a>
-
-<a href="https://linkedin.com/in/quvoncuz" target="_blank" class="contact-row">
-  <div class="contact-left">
-    <span class="contact-cat">LinkedIn</span>
-    <span class="contact-val" style="display:flex;align-items:center;gap:0.5rem;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      linkedin.com/quvoncuz
-    </span>
-  </div>
-  <span class="contact-arrow">↗</span>
-</a>
-
-<a href="https://github.com/quvoncuz" target="_blank" class="contact-row">
-  <div class="contact-left">
-    <span class="contact-cat">GitHub</span>
-    <span class="contact-val" style="display:flex;align-items:center;gap:0.5rem;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      github.com/quvoncuz
-    </span>
-  </div>
-  <span class="contact-arrow">↗</span>
-</a>
-
-<a href="https://leetcode.com/u/quvoncuz" target="_blank" class="contact-row">
-  <div class="contact-left">
-    <span class="contact-cat">LeetCode</span>
-    <span class="contact-val" style="display:flex;align-items:center;gap:0.5rem;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H19.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
-      leetcode/quvoncuz
-    </span>
-  </div>
-  <span class="contact-arrow">↗</span>
-</a>
+      <a href="https://linkedin.com/in/quvoncuz" target="_blank" class="contact-row">
+        <div class="contact-left"><span class="contact-cat">LinkedIn</span><span class="contact-val">linkedin.com/quvoncuz</span></div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a href="https://github.com/quvoncuz" target="_blank" class="contact-row">
+        <div class="contact-left"><span class="contact-cat">GitHub</span><span class="contact-val">github.com/quvoncuz</span></div>
+        <span class="contact-arrow">↗</span>
+      </a>
+      <a href="https://leetcode.com/u/quvoncuz" class="contact-row">
+        <div class="contact-left"><span class="contact-cat">Email</span><span class="contact-val">leetcode.com/quvoncuz</span></div>
+        <span class="contact-arrow">↗</span>
+      </a>
     </div>
   </div>
 </section>
@@ -521,16 +542,15 @@ footer span { color: var(--blue); }
 </footer>
 
 <script>
-
-// SCROLL REVEAL
-const obs = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 60);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// NAV HIGH
+// HAMBURGER MENU
+function toggleMenu() {
+  const nav = document.getElementById('navLinks');
+  const btn = document.getElementById('menuBtn');
+  nav.classList.toggle('open');
+  btn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+}
+function closeMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('menuBtn').textContent = '☰';
+}
+</script>
